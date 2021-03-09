@@ -1,5 +1,5 @@
 // Import MySQL connection.
-const connection = require('./connection.js');
+const connection = require("./connection.js");
 
 // Helper function for SQL syntax.
 // Let's say we want to pass 3 values into the mySQL query.
@@ -10,7 +10,7 @@ const printQuestionMarks = (num) => {
   const arr = [];
 
   for (let i = 0; i < num; i++) {
-    arr.push('?');
+    arr.push("?");
   }
 
   return arr.toString();
@@ -26,7 +26,7 @@ const objToSql = (ob) => {
     // check to skip hidden properties
     if (Object.hasOwnProperty.call(ob, key)) {
       // if string with spaces, add quotations (Lana Del Grey => 'Lana Del Grey')
-      if (typeof value === 'string' && value.indexOf(' ') >= 0) {
+      if (typeof value === "string" && value.indexOf(" ") >= 0) {
         value = `'${value}'`;
       }
       // e.g. {name: 'Lana Del Grey'} => ["name='Lana Del Grey'"]
@@ -53,12 +53,12 @@ const orm = {
   create(table, cols, vals, cb) {
     let queryString = `INSERT INTO ${table}`;
 
-    queryString += ' (';
+    queryString += " (";
     queryString += cols.toString();
-    queryString += ') ';
-    queryString += 'VALUES (';
+    queryString += ") ";
+    queryString += "VALUES (";
     queryString += printQuestionMarks(vals.length);
-    queryString += ') ';
+    queryString += ") ";
 
     console.log(queryString);
 
@@ -74,9 +74,9 @@ const orm = {
   update(table, objColVals, condition, cb) {
     let queryString = `UPDATE ${table}`;
 
-    queryString += ' SET ';
+    queryString += " SET ";
     queryString += objToSql(objColVals);
-    queryString += ' WHERE ';
+    queryString += " WHERE ";
     queryString += condition;
 
     // let queryString = `
